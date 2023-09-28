@@ -25,7 +25,6 @@ public class FirstJava { // File name must match name of class EXACTLY, and is P
             System.out.println(i);
         }
         System.out.println("Liftoff!");
-        
     }
 
 }
