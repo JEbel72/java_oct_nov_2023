@@ -12,7 +12,7 @@
 - Discussion topics are unlocked!  This week's are due Sunday, October 1, by 11:59 PM Pacific!!
 - To pass the course:
     - 10/11 core assignments
-    - 11/16 discussion topics (it is actually 11, not 10 as originally stated)
+    - 11/16 discussion topics
     - Pass the belt exam with any belt (no exceptions)
 - Start thinking about reaching out to Career Services if you opted in, especially if you're going to Projects & Algorithms after Java is finished!
 
