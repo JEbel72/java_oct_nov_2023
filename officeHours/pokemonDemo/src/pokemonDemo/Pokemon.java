@@ -42,20 +42,32 @@ public class Pokemon {
 		this.currentHP = this.maxHP; // Shorter approach
 	}
 	
-	public void battlePokemon(Pokemon opponent) {
-		// Grab the attack stat for this Pokemon AND the attack stat for the move
-		HashMap<String,Object> attackToUse = this.moves.get(0);
-		int attackPower = (int) attackToUse.get("basePower"); // Type-cast from Object to an int
-		int totalAttackPower = this.attack + attackPower;
-		// Grab the defense stat of the opponent
-		int defenseStat = opponent.getDefense();
-		// Calculate the damage
-		int damage = totalAttackPower - defenseStat;
-		// How can we ensure that we don't deal negative damage?
-		
-		// Deduct the damage from the opponent's HP
-		opponent.setCurrentHP(opponent.getCurrentHP() - damage);
-		// How can we ensure a Pokemon doesn't go below 0 HP?
+	public void battlePokemon(Pokemon opponent, String moveToUse) {
+		// Search for the move
+		for (HashMap<String, Object> moveToExamine : this.moves) {
+			String moveName = (String) moveToExamine.get("name"); // Grab the name of the move we're looking at
+			if (moveName.equals(moveToUse) && (int) moveToExamine.get("usesLeft") > 0) { // If we find the move with the given name AND there is at least one use left, then attack
+				System.out.println(opponent.getName() + " has " + opponent.getCurrentHP() + " HP.");
+				System.out.println(this.name + " has attacked " + opponent.getName() + " using " + moveToUse);
+				int attackPower = (int) moveToExamine.get("basePower"); // Type-cast from Object to an int
+				int totalAttackPower = this.attack + attackPower;
+				// Grab the defense stat of the opponent
+				int defenseStat = opponent.getDefense();
+				// Calculate the damage - using the Math.max method to ensure we deal nonnegative damage
+				int damage = Math.max(0,totalAttackPower - defenseStat);
+				System.out.println(damage + " damage inflicted!");
+				// Deduct the damage from the opponent's HP - using the Math.max method to ensure the Pokemon has nonnegative HP
+				int newHP = Math.max(0, opponent.getCurrentHP() - damage);
+				opponent.setCurrentHP(newHP);
+				System.out.println(this.name + " has " + this.currentHP + " HP left.");
+				System.out.println(opponent.getName() + " has " + opponent.getCurrentHP() + " HP left.");
+				// Decrease the number of uses for this move by one
+				int numberOfUsesLeft = (int) moveToExamine.get("usesLeft") - 1;
+				moveToExamine.replace("usesLeft", numberOfUsesLeft);
+				
+				break; // Allow us to exit the loop immediately
+			}
+		}
 	}
 	
 	// Getters and setters
