@@ -37,6 +37,7 @@
     - Packages we'll need in our project
 - Create our first model
 - Data types and validations for the columns in our models (will talk about more Wednesday)
+    - Don't forget important dependency!
     - VARCHAR vs. TEXT column types
     - @Min/@Max vs. @Size annotations
     - @NotNull vs. @NotEmpty vs. @NotBlank annotations
