@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page isErrorPage="true" %> <!--  For rendering errors in PUT routes -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>New Artist Page</title>
+<title>Edit artist</title>
 </head>
 <body>
-	<h1>New artist</h1>
-	<!-- Watch your modelAttribute name - must match @ModelAttribute name inside quotes EXACTLY -->
-	<form:form action="/artists/new" method="POST" modelAttribute="newArtist">
+	<a href="/artists">All artists</a>
+	<h1>Edit artist</h1>
+	<form:form action="/artists/${ artistToEdit.id }/edit" modelAttribute="artistToEdit" method="POST">
+		<input type="hidden" name="_method" value="put"> <!--  To allow PUT requests -->
 		<p>
 			<form:label path="name">Name:</form:label>
 			<form:errors path="name" />
@@ -46,7 +49,7 @@
 			<form:errors path="memberCount" />
 			<form:input type="number" path="memberCount" />
 		</p>
-		<input type="submit" value="Add artist" />
+		<input type="submit" value="Edit artist" />
 	</form:form>
 </body>
 </html>

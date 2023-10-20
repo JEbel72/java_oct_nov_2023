@@ -28,11 +28,21 @@ public class ArtistService {
 		return artistRepo.findAll();
 	}
 	
-	// Grab one Artist
+	// Grabbing one Artist
 	public Artist readOneArtist(Long id) {
 		Optional<Artist> artistOrNull = artistRepo.findById(id); // Attempt to find the Artist by ID
 		// Ternary operator (one-line if statement - "condition ? valueIfTrue : valueIfFalse")
 		return artistOrNull.isPresent() ? artistOrNull.get() : null;
+	}
+	
+	// Editing one Artist
+	public Artist editArtist(Artist editedArtist) {
+		return artistRepo.save(editedArtist);
+	}
+	
+	// Deleting an Artist
+	public void deleteArtist(Long id) {
+		artistRepo.deleteById(id); // Alternately, you can do .delete(artistToDelete), where you pass in the object itself
 	}
 	
 	// Grab all artists by name in ascending order
