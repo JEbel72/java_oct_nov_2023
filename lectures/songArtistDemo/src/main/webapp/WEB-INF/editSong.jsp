@@ -10,9 +10,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>About this song</title>
-    <link rel="stylesheet" href="/css/mainStyles.css" media="all" type="text/css"/>
+	<meta charset="UTF-8">
+	<title>Edit song</title>
+	<link rel="stylesheet" href="/css/formStyles.css" media="all" type="text/css"/>
 </head>
 <body>
 	<nav>
@@ -22,6 +22,12 @@
 			<li><a href="/songs">All songs</a></li>
 		</ul>
 	</nav>
-	<p>ADD INFO ABOUT THIS SONG - INCLUDING THE ARTIST - HERE!</p>
+	<h1>Edit song</h1>
+	<!-- Fill out attributes for form here, and add inputs!!! -->
+	<form:form action="/???" modelAttribute="???" method="POST">
+		<input type="hidden" name="_method" value="put"> <!-- To allow PUT requests -->
+		<label>ADD OTHER INPUTS HERE!!!</label>
+		<input type="submit" class="btn" value="Edit song" />
+	</form:form>
 </body>
 </html>

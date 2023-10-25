@@ -1,4 +1,4 @@
-package com.adrianbarnard.songartiststartercode.controllers;
+package com.adrianbarnard.songartistdemo.controllers;
 
 import java.util.List;
 
@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-import com.adrianbarnard.songartiststartercode.models.Song;
-import com.adrianbarnard.songartiststartercode.services.SongService;
+import com.adrianbarnard.songartistdemo.models.Song;
+import com.adrianbarnard.songartistdemo.services.ArtistService;
+import com.adrianbarnard.songartistdemo.services.SongService;
 
 import jakarta.validation.Valid;
 
@@ -22,11 +23,15 @@ import jakarta.validation.Valid;
 public class SongController {
 	@Autowired
 	private SongService songServ;
+	
+	@Autowired
+	private ArtistService artistServ;
 
 	/* Routes involving songs */
 	@GetMapping("/songs/new") // Page with our songs form
 	public String newSongFormPage(@ModelAttribute("newSong") Song newSong, Model model) {
-		// Do we need to pass anything in via our model?
+		// We need to grab the artists from the database via our artist service!!!
+		model.addAttribute("allArtists", artistServ.readAllArtists());
 		return "newSong.jsp";
 	}
 	
@@ -36,6 +41,7 @@ public class SongController {
 		// If the validations are no good...
 		if (result.hasErrors()) {
 			/* If you pass anything in via the Model, you must pass it in again!!! */
+			model.addAttribute("allArtists", artistServ.readAllArtists());
 			return "newSong.jsp";
 		}
 		// The validations are good

@@ -11,8 +11,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>About this song</title>
     <link rel="stylesheet" href="/css/mainStyles.css" media="all" type="text/css"/>
+    <title>About this song</title>
 </head>
 <body>
 	<nav>
@@ -22,6 +22,15 @@
 			<li><a href="/songs">All songs</a></li>
 		</ul>
 	</nav>
-	<p>ADD INFO ABOUT THIS SONG - INCLUDING THE ARTIST - HERE!</p>
+	<h3><c:out value="${ thisSong.title }"/> by <c:out value="${ thisSong.recordingArtist.name }"/></h3>
+	<!-- Challenge: Try to display the date as, for example, "January 30, 2000"  -->
+	<p>Release date: <c:out value="${ thisSong.releaseDate }"/></p>
+	<p>Has explicit lyrics:
+		<c:choose> <!-- Display Yes or No accordingly instead of true or false -->
+			<c:when test="${ thisSong.isExplicit }">Yes</c:when>
+			<c:otherwise>No</c:otherwise>
+		</c:choose>
+	</p>
+	<p>Some sample lyrics: <c:out value="${ thisSong.lyrics }"/></p>
 </body>
 </html>

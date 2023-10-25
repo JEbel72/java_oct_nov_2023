@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    /* border: 1px solid red; */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    background-color: #ff80c0;
+    justify-content: flex-end;
+}
+
+nav h1 {
+	flex: 10;
+}
+
+nav a {
+    text-decoration: none;
+    flex: 2;
+    color: #804040;
+    margin: 10px;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 10px;
+}
+
+h1, h3, p, table {
+    margin: 10px;
+}
+
+.btn, .btn-delete {
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: black;
+    padding: 5px;
+    font-size: 12pt;
+    text-decoration: none;
+}
+
+table {
+	border-collapse: collapse; /* Removes space between cells in table */
+}
+
+th, tr, td {
+	text-align: center;
+	border: 2px solid black;
+	margin: 0;
+	padding: 5px;
+}
+
+tbody > tr:nth-child(2n) {
+	background-color: lightgreen;
+}
+
+tbody > tr:nth-child(2n+1) {
+	background-color: lightgrey;
+}
+
+.btn {
+	background-color: lightblue;
+}
+
+.btn-delete {
+    background-color: salmon;
+}
+
+form {
+	display: inline; /* For making the delete form button inline */
+}
