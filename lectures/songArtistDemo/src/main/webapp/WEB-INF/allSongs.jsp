@@ -32,7 +32,12 @@
 					<td><c:out value="${ currentSong.id }"/></td>
 					<td><c:out value="${ currentSong.title }"/></td>
 					<td><c:out value="${ currentSong.recordingArtist.name }"/></td> <!--  Grab name of artist/group -->
-					<td><a class="btn" href="/songs/${ currentSong.id }">View</a></td>
+					<td><a class="btn" href="/songs/${ currentSong.id }">View</a> <a class="btn" href="/songs/${ currentSong.id }/edit">Edit</a>
+					<form action="/songs/${ currentSong.id }/delete" method="POST">
+						<input type="hidden" name="_method" value="delete">
+						<input type="submit" value="Delete">
+					</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>

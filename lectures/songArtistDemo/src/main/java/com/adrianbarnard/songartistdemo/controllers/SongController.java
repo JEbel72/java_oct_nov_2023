@@ -67,8 +67,7 @@ public class SongController {
 	public String editSongPage(@PathVariable("id") Long id, Model model) { // NO @ModelAttribute annotation
 		Song thisSong = songServ.readOneSong(id); // Grabbing one song by ID from the database via the service and repo
 		model.addAttribute("editedSong", thisSong);
-		String[] musicGenres = {"Pop", "Country", "Rock", "Metal", "R&B", "Rap"};
-		model.addAttribute("allGenres", musicGenres);
+		model.addAttribute("allArtists", artistServ.readAllArtists());
 		return "editSong.jsp";
 	}
 	
@@ -77,7 +76,7 @@ public class SongController {
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			// Pass in attributes from the model OTHER than the actual object we're editing
-
+			model.addAttribute("allArtists", artistServ.readAllArtists());
 			return "editSong.jsp";
 		}
 		songServ.editSong(editedSong); // Edit song in DB via service and repo

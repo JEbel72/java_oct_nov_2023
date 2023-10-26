@@ -25,6 +25,7 @@
 				<th>Name</th>
 				<th>Genre</th>
 				<th>Is solo or group</th>
+				<th>Number of songs</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -45,6 +46,7 @@
 							</c:otherwise>
 						</c:choose>
 					</td>
+					<td><c:out value="${ thisArtist.songs.size() }"/></td>
 					<td><a class="btn" href="/artists/${ thisArtist.id }">View</a> <a class="btn" href="/artists/${ thisArtist.id }/edit">Edit</a>
 						<form action="/artists/${ thisArtist.id }/delete" method="POST">
 							<input type="hidden" name="_method" value="delete" />

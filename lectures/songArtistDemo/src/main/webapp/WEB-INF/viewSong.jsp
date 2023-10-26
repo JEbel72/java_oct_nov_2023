@@ -26,7 +26,8 @@
 	<!-- Challenge: Try to display the date as, for example, "January 30, 2000"  -->
 	<p>Release date: <c:out value="${ thisSong.releaseDate }"/></p>
 	<p>Has explicit lyrics:
-		<c:choose> <!-- Display Yes or No accordingly instead of true or false -->
+		<!-- Display Yes or No accordingly instead of true or false -->
+		<c:choose>
 			<c:when test="${ thisSong.isExplicit }">Yes</c:when>
 			<c:otherwise>No</c:otherwise>
 		</c:choose>

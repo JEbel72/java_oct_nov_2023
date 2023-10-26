@@ -40,6 +40,11 @@
 			</c:otherwise>
 		</c:choose>
 	</p>
-	<p>ADD SONGS by this artist/group here!!!</p>
+	<p>List of songs by <c:out value="${ thisArtist.name }" />:</p>
+	<ul>
+		<c:forEach var="thisSong" items="${ thisArtist.songs }">
+			<li><c:out value="${ thisSong.title }"/></li>
+		</c:forEach>
+	</ul>
 </body>
 </html>
