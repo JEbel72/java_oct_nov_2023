@@ -38,7 +38,7 @@
 					<td><c:out value="${ thisStudent.id }"/></td>
 					<td><c:out value="${ thisStudent.name }"/></td>
 					<td><a class="btn" href="/students/${ thisStudent.id }">View</a> <a class="btn" href="/students/${ thisStudent.id }/edit">Edit</a>
-						<form action="/route/PUT_ID_IN_HERE_USING_thisItem/delete" method="POST">
+						<form action="/students/${ thisStudent.id }/delete" method="POST">
 							<input type="hidden" name="_method" value="delete" />
 							<input type="submit" class="btn-delete" value="Delete"/>
 						</form>

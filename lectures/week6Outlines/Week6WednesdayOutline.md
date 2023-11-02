@@ -1,4 +1,4 @@
-# Week 6 Tuesday in Java - October 31, 2023
+# Week 6 Wednesday in Java - November 1, 2023
 
 ## Reminders:
 - Core assignments this week (MANDATORY if you haven't got at least 10 core assignments done):
@@ -24,14 +24,6 @@
     - Many-to-many *office hour* demo with login/registration
 
 ## Lecture outline:
-- Many-to-many relationships
-    - Two ways to implement - when to do each
-- Create new project from scratch: students and clubs
-    - Models
-    - Other files
-- Review create, read all, read one and update (no linking classes yet)
-
-### Will get to tomorrow:
 - Deleting a student (review)
 - Link a student and club
     - Show clubs for each student
@@ -39,3 +31,4 @@
 - Remove links between student and club
 - Revisit editing - with a many-to-many relationship (be careful!)
 - Revisit deleting - with a many-to-many relationship (be careful!)
+- If we have time, start belt review project (outline for this intentionally left out)

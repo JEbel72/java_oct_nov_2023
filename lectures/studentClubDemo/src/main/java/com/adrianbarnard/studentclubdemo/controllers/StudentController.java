@@ -1,16 +1,22 @@
 package com.adrianbarnard.studentclubdemo.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.adrianbarnard.studentclubdemo.models.Club;
 import com.adrianbarnard.studentclubdemo.models.Student;
+import com.adrianbarnard.studentclubdemo.services.ClubService;
 import com.adrianbarnard.studentclubdemo.services.StudentService;
 
 import jakarta.validation.Valid;
@@ -19,6 +25,9 @@ import jakarta.validation.Valid;
 public class StudentController {
 	@Autowired
 	private StudentService studentServ;
+	
+	@Autowired
+	private ClubService clubServ;
 	
 	@GetMapping("/")
 	public String rootRoute() {
@@ -52,7 +61,9 @@ public class StudentController {
 	// Read ONE student
 	@GetMapping("/students/{id}")
 	public String readOneStudentPage(@PathVariable("id") Long id, Model viewModel) {
-		viewModel.addAttribute("thisStudent", studentServ.readOneStudent(id));
+		Student thisStudent = studentServ.readOneStudent(id);
+		viewModel.addAttribute("thisStudent", thisStudent);
+		viewModel.addAttribute("unjoinedClubs", clubServ.readClubsWithoutStudent(thisStudent));
 		return "readOneStudent.jsp";
 	}
 	
@@ -70,7 +81,37 @@ public class StudentController {
 			return "updateStudent.jsp";
 		}
 		// Validations are good, so we'll add the student to the database
+		// Grab the clubs again so we can properly link to the edited student
+		List<Club> linkedClubs = studentServ.readOneStudent(studentToEdit.getId()).getEnrolledClubs();
+		studentToEdit.setEnrolledClubs(linkedClubs); // Relink the clubs for this student
 		studentServ.updateStudent(studentToEdit);
 		return "redirect:/students/"+studentToEdit.getId();
+	}
+	
+	@DeleteMapping("/students/{id}/delete") // Deleting a student
+	public String deleteStudentFromDB(@PathVariable("id") Long id) {
+		studentServ.deleteStudent(id);
+		return "redirect:/students";
+	}
+	
+	// Add a club for the student
+	@PostMapping("/students/addclub")
+	public String addStudentToClub(@RequestParam("studentId") Long studentId, @RequestParam("clubId") Long clubId) {
+		studentServ.addStudentToClub(studentId, clubId);
+		return "redirect:/students/"+studentId;
+	}
+	
+	// Added as the form didn't work during lecture
+//	@GetMapping("/students/{studentId}/removeclub/{clubId}")
+//	public String removeStudentFromClub(@PathVariable("studentId") Long studentId, @PathVariable("clubId") Long clubId) {
+//		studentServ.removeStudentFromClub(studentId, clubId);
+//		return "redirect:/students/"+studentId;
+//	}
+	
+	@PutMapping("/students/removeclub") // Originally a POST request, but changed to PUT after lecture
+	public String leaveClub(@RequestParam("studentId") Long studentId, @RequestParam("clubId") Long clubId) {
+		System.out.println("In PUT method to remove club");
+		studentServ.removeStudentFromClub(studentId, clubId);
+		return "redirect:/students/"+studentId;
 	}
 }
